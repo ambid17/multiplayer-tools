@@ -29,6 +29,7 @@ public class CameraFollow : MonoBehaviour
 
     void LateUpdate()
     {
+        if(GameManager.Instance.IsPaused) return;
         if (!target) return;
         Vector2 lookInputs = lookAction.ReadValue<Vector2>();
         yaw += lookInputs.x * mouseSensitivity * Time.deltaTime;

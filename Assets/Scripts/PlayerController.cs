@@ -10,8 +10,6 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayer;
     public Transform cameraTransform;
 
-    private static readonly int GroundLayer = 6;
-
     InputAction moveAction;
     InputAction jumpAction;
     Vector2 moveInputs;
@@ -22,38 +20,45 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private Vector3 velocity;
+    [SerializeField]
+    private float velocityMagnitude;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         moveAction = InputSystem.actions.FindAction("Move");
         jumpAction = InputSystem.actions.FindAction("Jump");
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
     {
+        if (GameManager.Instance.IsPaused) return;
         moveInputs = moveAction.ReadValue<Vector2>();
         isJumping = jumpAction.ReadValue<float>() != 0 ? true : false;
         //isGrounded = Physics.Raycast(transform.position, Vector3.down, transform.localScale.x + 0.01f, groundLayer);
-        Debug.DrawRay(transform.position, Vector3.down * (transform.localScale.x + 0.01f), Color.red);
+        Debug.DrawRay(transform.position, Vector3.down * (transform.localScale.x + 0.01f), Color.green);
 
         velocity = rb.linearVelocity;
-        if(velocity.magnitude > 0.1f)
+        velocityMagnitude = velocity.magnitude;
+        if (velocity.magnitude > 0.1f)
         {
             float scaleIncrease = growSpeed * velocity.magnitude * Time.deltaTime;
             transform.localScale += new Vector3(scaleIncrease, scaleIncrease, scaleIncrease);
+            rb.mass = transform.localScale.x;
         }
     }
 
     void FixedUpdate()
     {
+        if (GameManager.Instance.IsPaused) return;
         Vector3 forceDirection = Vector3.zero;
         var movementRelativeToCamera = new Vector3(moveInputs.x, 0, moveInputs.y);
         var cameraLookingDirection = cameraTransform.rotation * Vector3.forward;
         cameraLookingDirection = new Vector3(cameraLookingDirection.x, 0f, cameraLookingDirection.z).normalized;
         var cameraRelativeForce = Quaternion.FromToRotation(Vector3.forward, cameraLookingDirection) * movementRelativeToCamera;
 
-        rb.AddForce(cameraRelativeForce * moveSpeed);
+        rb.AddForce(cameraRelativeForce * moveSpeed * transform.localScale.x);
         if (isJumping && isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
@@ -62,7 +67,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == GroundLayer)
+        if (collision.gameObject.layer == GameManager.GroundLayer)
         {
             isGrounded = true;
         }
@@ -70,7 +75,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.layer == GroundLayer)
+        if (collision.gameObject.layer == GameManager.GroundLayer)
         {
             isGrounded = false;
         }
