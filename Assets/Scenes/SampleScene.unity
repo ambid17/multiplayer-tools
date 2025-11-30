@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 363165725}
   - component: {fileID: 363165724}
   - component: {fileID: 363165723}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -507,6 +507,7 @@ GameObject:
   m_Component:
   - component: {fileID: 435708339}
   - component: {fileID: 435708341}
+  - component: {fileID: 435708342}
   - component: {fileID: 435708340}
   - component: {fileID: 435708338}
   - component: {fileID: 435708337}
@@ -650,8 +651,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   rb: {fileID: 0}
-  speed: 10
+  moveSpeed: 10
+  growSpeed: 0.001
+  jumpForce: 5
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  cameraTransform: {fileID: 330585546}
+  isGrounded: 0
+  isJumping: 0
   velocity: {x: 0, y: 0, z: 0}
+--- !u!114 &435708342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435708335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8653f6d1b3b21584cbeb69fc67a61063, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SnowPainter
+  snowRenderer: {fileID: 0}
+  splatTextureProperty: _SplatMap
+  splatResolution: 1024
+  brushTexture: {fileID: 0}
+  brushSize: 0.08
+  brushStrength: 1
+  snowLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  paintInterval: 0.03
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
