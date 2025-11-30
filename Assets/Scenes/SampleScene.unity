@@ -271,8 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
   target: {fileID: 435708339}
   distance: 4
-  minDistance: 2
-  maxDistance: 6
+  distanceGrowth: 1.5
   mouseSensitivity: 50
   verticalMin: -30
   verticalMax: 70
@@ -605,7 +604,7 @@ Transform:
   m_GameObject: {fileID: 435708335}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 403.73, y: 104.61, z: 277.08}
+  m_LocalPosition: {x: 563.34, y: 2.22, z: 274.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -652,7 +651,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   rb: {fileID: 0}
   moveSpeed: 10
-  growSpeed: 0.001
+  growSpeed: 0.1
   jumpForce: 5
   groundLayer:
     serializedVersion: 2

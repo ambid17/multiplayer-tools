@@ -8,10 +8,9 @@ public class CameraFollow : MonoBehaviour
 
     [Header("Settings")]
     public float distance = 4f;
-    public float minDistance = 2f;
-    public float maxDistance = 6f;
+    public float distanceGrowth = 1f;
 
-    public float mouseSensitivity = 180f;
+    public float mouseSensitivity = 50f;
     public float verticalMin = -30f;
     public float verticalMax = 70f;
 
@@ -42,12 +41,9 @@ public class CameraFollow : MonoBehaviour
         transform.eulerAngles = currentRotation;
 
         // --- Camera collision ---
-        float desiredDistance = distance;
-        Ray ray = new Ray(target.position, -transform.forward);
-        if (Physics.Raycast(ray, out RaycastHit hit, distance))
-        {
-            desiredDistance = Mathf.Clamp(hit.distance, minDistance, maxDistance);
-        }
+        float desiredDistance = distance + target.transform.localScale.x * distanceGrowth;
+        
+
 
         // Move camera
         transform.position = target.position - transform.forward * desiredDistance;
