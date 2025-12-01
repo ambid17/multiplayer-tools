@@ -2219,7 +2219,7 @@ Terrain:
   m_TreeMaximumFullLODCount: 50
   m_DetailObjectDistance: 80
   m_DetailObjectDensity: 1
-  m_HeightmapPixelError: 5
+  m_HeightmapPixelError: 1
   m_SplatMapDistance: 1000
   m_HeightmapMinimumLODSimplification: 0
   m_HeightmapMaximumLOD: 0
@@ -2230,7 +2230,7 @@ Terrain:
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
+  m_MaterialTemplate: {fileID: 2100000, guid: 01596625c583e7744a8e1f826b6c9727, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -2255,7 +2255,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 496602160}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &367023516
@@ -3329,6 +3330,85 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 77dd8af1f7b20074297d5a7f3963b77f, type: 3}
   m_PrefabInstance: {fileID: 493106957}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &496602159
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 496602160}
+  - component: {fileID: 496602162}
+  - component: {fileID: 496602161}
+  m_Layer: 0
+  m_Name: Digger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &496602160
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496602159}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 363165725}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &496602161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496602159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c12efbee81634dd78fa2cb2ab5a26c2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Digger.Core::Digger.Modules.Core.Sources.TerrainInterface.TerrainCutter
+  digger: {fileID: 496602162}
+--- !u!114 &496602162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496602159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34d2e180125d4ac3a3e845f480befdfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Digger.Core::Digger.Modules.Core.Sources.DiggerSystem
+  master: {fileID: 1871231137}
+  guid: 1037401ef0fc41d4696ee5451f05e046
+  version: 3
+  basePathData: Assets\DiggerData\Scenes\SampleScene\1037401ef0fc41d4696ee5451f05e046
+  cutter: {fileID: 496602161}
+  heightmapScale: {x: 1.953125, y: 1, z: 1.953125}
+  alphamapsSize:
+    x: 512
+    y: 512
+  uvScale: {x: 0.001, y: 0.001}
+  holeMapScale: {x: 1.953125, y: 1, z: 1.953125}
+  Terrain: {fileID: 363165724}
+  Materials: []
+  materialType: 2
+  terrainTextures: []
+  chunksInStreamingAssets: []
+  persistenceSubPath: 
+  ShowDebug: 0
+  onChunkObjectCreated:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &500966204
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9729,6 +9809,66 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1797972101}
   m_SourcePrefab: {fileID: 100100000, guid: b0ac8f9e847d45b4bba39179e1a8e0c5, type: 3}
+--- !u!1 &1871231136
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1871231138}
+  - component: {fileID: 1871231137}
+  m_Layer: 0
+  m_Name: Digger Master
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1871231137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871231136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 521f8e3d06ab44cadaed6ad179732778, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Digger.Core::Digger.Modules.Core.Sources.DiggerMaster
+  chunkSize: 33
+  sceneDataFolder: SampleScene
+  screenRelativeTransitionHeightLod0: 0.1
+  screenRelativeTransitionHeightLod1: 0.05
+  colliderLodIndex: 0
+  createLODs: 0
+  showUnderlyingObjects: 0
+  resolutionMult: 1
+  voxelHeight: 1
+  autoVoxelHeight: 0
+  layer: 0
+  chunksTag: Untagged
+  enableOcclusionCulling: 1
+  enableContributeGI: 1
+  forceMicroSplatMaterialAssetUpdate: 0
+  autoSaveMeshesAsAssets: 1
+--- !u!4 &1871231138
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871231136}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1904594032
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10872,3 +11012,4 @@ SceneRoots:
   - {fileID: 175614080}
   - {fileID: 363165725}
   - {fileID: 1357471436}
+  - {fileID: 1871231138}
