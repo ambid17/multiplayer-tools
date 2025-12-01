@@ -30,9 +30,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private BrushType brushType = BrushType.Sphere;
     [SerializeField] private ActionType actionType = ActionType.Dig;
     [SerializeField] private int textureIndex = 0;
-    [SerializeField] private float opacity = 0.5f;
+    [SerializeField] private float opacityMax = 0.5f;
     [SerializeField] private float brushSize = 0.5f;
-    [SerializeField] private Vector3 lastFrameLocation;
+    [SerializeField] private float minSpeedToPaint = 1f;
+    [SerializeField] private int frameInPastToPaint = 5;
+    private float theoreticalMaxVelocity = 15f;
 
     void Start()
     {
@@ -54,19 +56,20 @@ public class PlayerController : MonoBehaviour
         velocityMagnitude = velocity.magnitude;
 
         var horizontalVelocity = new Vector3(velocity.x, 0, velocity.z);
-        if (horizontalVelocity.magnitude > 0.1f)
+        if (horizontalVelocity.magnitude > minSpeedToPaint)
         {
             float scaleIncrease = growSpeed * horizontalVelocity.magnitude * Time.deltaTime;
             transform.localScale += new Vector3(scaleIncrease, scaleIncrease, scaleIncrease);
             rb.mass = transform.localScale.x;
 
-            if (Physics.Raycast(transform.position, Vector3.down, out var hit, transform.localScale.y + 0.01f))
+            var opacity = Mathf.Lerp(0, opacityMax, horizontalVelocity.magnitude / theoreticalMaxVelocity);
+
+            var pastLocation = transform.position - (velocity * Time.deltaTime * frameInPastToPaint); 
+            if (Physics.Raycast(pastLocation, Vector3.down, out var hit, transform.localScale.y + 0.01f, groundLayer))
             {
-                digger.Modify(hit.point, brushType, actionType, textureIndex, opacity, transform.localScale.x);
+                digger.ModifyAsyncBuffured(hit.point, brushType, actionType, textureIndex, opacity, transform.localScale.x);
             }
         }
-
-        lastFrameLocation = transform.position;
     }
 
     void FixedUpdate()

@@ -3103,11 +3103,13 @@ MonoBehaviour:
   isJumping: 0
   velocity: {x: 0, y: 0, z: 0}
   velocityMagnitude: 0
-  brushType: 0
+  brushType: 1
   actionType: 0
   textureIndex: 1
-  opacity: 0.1
+  opacityMax: 0.25
   brushSize: 0.5
+  minSpeedToPaint: 1
+  frameInPastToPaint: 5
 --- !u!1 &442624975
 GameObject:
   m_ObjectHideFlags: 0
@@ -3347,7 +3349,7 @@ GameObject:
   - component: {fileID: 496602160}
   - component: {fileID: 496602162}
   - component: {fileID: 496602161}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Digger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3396,10 +3398,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Digger.Core::Digger.Modules.Core.Sources.DiggerSystem
   master: {fileID: 1871231137}
   guid: 1037401ef0fc41d4696ee5451f05e046
-  version: 4
+  version: 3
   basePathData: Assets\DiggerData\Scenes\SampleScene\1037401ef0fc41d4696ee5451f05e046
   cutter: {fileID: 496602161}
-  heightmapScale: {x: 1.953125, y: 1, z: 1.953125}
+  heightmapScale: {x: 0.9765625, y: 0.9765625, z: 0.9765625}
   alphamapsSize:
     x: 512
     y: 512
@@ -9848,17 +9850,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 521f8e3d06ab44cadaed6ad179732778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Digger.Core::Digger.Modules.Core.Sources.DiggerMaster
-  chunkSize: 33
+  chunkSize: 17
   sceneDataFolder: SampleScene
   screenRelativeTransitionHeightLod0: 0.1
   screenRelativeTransitionHeightLod1: 0.05
   colliderLodIndex: 0
   createLODs: 0
   showUnderlyingObjects: 0
-  resolutionMult: 1
+  resolutionMult: 2
   voxelHeight: 1
-  autoVoxelHeight: 0
-  layer: 0
+  autoVoxelHeight: 1
+  layer: 6
   chunksTag: Untagged
   enableOcclusionCulling: 1
   enableContributeGI: 1
