@@ -824,7 +824,7 @@ PlayerSettings:
   webWasm2023: 0
   webEnableSubmoduleStrippingCompatibility: 0
   scriptingDefineSymbols:
-    Standalone: FISHNET;FISHNET_V4
+    Standalone: FISHNET;FISHNET_V4;__DIGGER__;__DIGGER_ADVANCED_OPERATIONS__;__DIGGER_RUNTIME__
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
