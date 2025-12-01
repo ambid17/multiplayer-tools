@@ -1,3 +1,5 @@
+using Digger.Modules.Core.Sources;
+using Digger.Modules.Runtime.Sources;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 5f;
     public LayerMask groundLayer;
     public Transform cameraTransform;
+    public DiggerMasterRuntime digger;
 
     InputAction moveAction;
     InputAction jumpAction;
@@ -24,8 +27,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float velocityMagnitude;
 
+    [SerializeField] private BrushType brushType = BrushType.Sphere;
+    [SerializeField] private ActionType actionType = ActionType.Dig;
+    [SerializeField] private int textureIndex = 0;
+    [SerializeField] private float opacity = 0.5f;
+    [SerializeField] private float brushSize = 0.5f;
+    [SerializeField] private Vector3 lastFrameLocation;
+
     void Start()
     {
+        digger = FindAnyObjectByType<DiggerMasterRuntime>();
         rb = GetComponent<Rigidbody>();
         moveAction = InputSystem.actions.FindAction("Move");
         jumpAction = InputSystem.actions.FindAction("Jump");
@@ -38,16 +49,24 @@ public class PlayerController : MonoBehaviour
         moveInputs = moveAction.ReadValue<Vector2>();
         isJumping = jumpAction.ReadValue<float>() != 0 ? true : false;
         //isGrounded = Physics.Raycast(transform.position, Vector3.down, transform.localScale.x + 0.01f, groundLayer);
-        Debug.DrawRay(transform.position, Vector3.down * (transform.localScale.x + 0.01f), Color.green);
 
         velocity = rb.linearVelocity;
         velocityMagnitude = velocity.magnitude;
-        if (velocity.magnitude > 0.1f)
+
+        var horizontalVelocity = new Vector3(velocity.x, 0, velocity.z);
+        if (horizontalVelocity.magnitude > 0.1f)
         {
-            float scaleIncrease = growSpeed * velocity.magnitude * Time.deltaTime;
+            float scaleIncrease = growSpeed * horizontalVelocity.magnitude * Time.deltaTime;
             transform.localScale += new Vector3(scaleIncrease, scaleIncrease, scaleIncrease);
             rb.mass = transform.localScale.x;
+
+            if (Physics.Raycast(transform.position, Vector3.down, out var hit, transform.localScale.y + 0.01f))
+            {
+                digger.Modify(hit.point, brushType, actionType, textureIndex, opacity, transform.localScale.x);
+            }
         }
+
+        lastFrameLocation = transform.position;
     }
 
     void FixedUpdate()

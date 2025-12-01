@@ -1024,7 +1024,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 175614077}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6d0a06b1c1536848b366f5895f6e553, type: 3}
   m_Name: 
@@ -3098,10 +3098,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   cameraTransform: {fileID: 330585546}
+  digger: {fileID: 0}
   isGrounded: 0
   isJumping: 0
   velocity: {x: 0, y: 0, z: 0}
   velocityMagnitude: 0
+  brushType: 0
+  actionType: 0
+  textureIndex: 1
+  opacity: 0.1
+  brushSize: 0.5
 --- !u!1 &442624975
 GameObject:
   m_ObjectHideFlags: 0
@@ -3390,7 +3396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Digger.Core::Digger.Modules.Core.Sources.DiggerSystem
   master: {fileID: 1871231137}
   guid: 1037401ef0fc41d4696ee5451f05e046
-  version: 3
+  version: 4
   basePathData: Assets\DiggerData\Scenes\SampleScene\1037401ef0fc41d4696ee5451f05e046
   cutter: {fileID: 496602161}
   heightmapScale: {x: 1.953125, y: 1, z: 1.953125}
@@ -3400,9 +3406,13 @@ MonoBehaviour:
   uvScale: {x: 0.001, y: 0.001}
   holeMapScale: {x: 1.953125, y: 1, z: 1.953125}
   Terrain: {fileID: 363165724}
-  Materials: []
+  Materials:
+  - {fileID: 2100000, guid: 5396f044995b80042b6201ad19465e00, type: 2}
   materialType: 2
-  terrainTextures: []
+  terrainTextures:
+  - {fileID: 2800000, guid: 51075f3a90da0474d8e20c9e207113aa, type: 3}
+  - {fileID: 2800000, guid: 187a9cbbdb313414a96fed488123c31c, type: 3}
+  - {fileID: 2800000, guid: b4da824f5b4b043c7bc921d2dea78c4e, type: 3}
   chunksInStreamingAssets: []
   persistenceSubPath: 
   ShowDebug: 0
@@ -9869,6 +9879,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1896536474
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1896536476}
+  - component: {fileID: 1896536475}
+  m_Layer: 0
+  m_Name: Digger Master Runtime
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1896536475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896536474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2071d786339914393a9a433cd58890f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Digger.Runtime::Digger.Modules.Runtime.Sources.DiggerMasterRuntime
+  enablePersistence: 0
+--- !u!4 &1896536476
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896536474}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1904594032
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11013,3 +11068,4 @@ SceneRoots:
   - {fileID: 363165725}
   - {fileID: 1357471436}
   - {fileID: 1871231138}
+  - {fileID: 1896536476}
