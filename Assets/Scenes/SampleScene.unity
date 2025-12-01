@@ -3103,13 +3103,13 @@ MonoBehaviour:
   isJumping: 0
   velocity: {x: 0, y: 0, z: 0}
   velocityMagnitude: 0
-  brushType: 1
+  brushType: 0
   actionType: 0
-  textureIndex: 1
+  textureIndex: 0
   opacityMax: 0.25
-  brushSize: 0.5
   minSpeedToPaint: 1
-  frameInPastToPaint: 5
+  frameInPastToPaint: 10
+  digSizeMultiplier: 0.8
 --- !u!1 &442624975
 GameObject:
   m_ObjectHideFlags: 0
@@ -3398,7 +3398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Digger.Core::Digger.Modules.Core.Sources.DiggerSystem
   master: {fileID: 1871231137}
   guid: 1037401ef0fc41d4696ee5451f05e046
-  version: 3
+  version: 2
   basePathData: Assets\DiggerData\Scenes\SampleScene\1037401ef0fc41d4696ee5451f05e046
   cutter: {fileID: 496602161}
   heightmapScale: {x: 0.9765625, y: 0.9765625, z: 0.9765625}

@@ -31,9 +31,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private ActionType actionType = ActionType.Dig;
     [SerializeField] private int textureIndex = 0;
     [SerializeField] private float opacityMax = 0.5f;
-    [SerializeField] private float brushSize = 0.5f;
     [SerializeField] private float minSpeedToPaint = 1f;
     [SerializeField] private int frameInPastToPaint = 5;
+    [SerializeField] private float digSizeMultiplier = 0.8f;
     private float theoreticalMaxVelocity = 15f;
 
     void Start()
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
         if (GameManager.Instance.IsPaused) return;
         moveInputs = moveAction.ReadValue<Vector2>();
         isJumping = jumpAction.ReadValue<float>() != 0 ? true : false;
-        //isGrounded = Physics.Raycast(transform.position, Vector3.down, transform.localScale.x + 0.01f, groundLayer);
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, transform.localScale.x + 0.01f, groundLayer);
 
         velocity = rb.linearVelocity;
         velocityMagnitude = velocity.magnitude;
@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour
         var horizontalVelocity = new Vector3(velocity.x, 0, velocity.z);
         if (horizontalVelocity.magnitude > minSpeedToPaint)
         {
+            // TODO: lower in size if the ground isn't snow, and dont deform the terrain
             float scaleIncrease = growSpeed * horizontalVelocity.magnitude * Time.deltaTime;
             transform.localScale += new Vector3(scaleIncrease, scaleIncrease, scaleIncrease);
             rb.mass = transform.localScale.x;
@@ -67,7 +68,7 @@ public class PlayerController : MonoBehaviour
             var pastLocation = transform.position - (velocity * Time.deltaTime * frameInPastToPaint); 
             if (Physics.Raycast(pastLocation, Vector3.down, out var hit, transform.localScale.y + 0.01f, groundLayer))
             {
-                digger.ModifyAsyncBuffured(hit.point, brushType, actionType, textureIndex, opacity, transform.localScale.x);
+                digger.ModifyAsyncBuffured(pastLocation, brushType, actionType, textureIndex, opacity, transform.localScale.x * digSizeMultiplier);
             }
         }
     }
@@ -85,22 +86,6 @@ public class PlayerController : MonoBehaviour
         if (isJumping && isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.layer == GameManager.GroundLayer)
-        {
-            isGrounded = true;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.layer == GameManager.GroundLayer)
-        {
-            isGrounded = false;
         }
     }
 }
