@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public Rigidbody rb;
+    private Rigidbody rb;
     public float moveSpeed = 10f;
     public float growSpeed = 0.001f;
     public float jumpForce = 5f;
@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     InputAction moveAction;
     InputAction jumpAction;
     Vector2 moveInputs;
+    [Header("Debug info")]
     [SerializeField]
     bool isGrounded;
     [SerializeField]
