@@ -1,5 +1,6 @@
 using Digger.Modules.Core.Sources;
 using Digger.Modules.Runtime.Sources;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int frameInPastToPaint = 5;
     [SerializeField] private float digSizeMultiplier = 0.8f;
     private float theoreticalMaxVelocity = 15f;
+    private List<DigAction> digActions = new List<DigAction>();
 
     void Start()
     {
@@ -64,11 +66,17 @@ public class PlayerController : MonoBehaviour
             rb.mass = transform.localScale.x;
 
             var opacity = Mathf.Lerp(0, opacityMax, horizontalVelocity.magnitude / theoreticalMaxVelocity);
-
-            var pastLocation = transform.position - (velocity * Time.deltaTime * frameInPastToPaint); 
-            if (Physics.Raycast(pastLocation, Vector3.down, out var hit, transform.localScale.y + 0.01f, groundLayer))
+            var digLocation = transform.position - (velocity * Time.deltaTime * frameInPastToPaint);
+            var digSize = transform.localScale.x * digSizeMultiplier;
+            if (Physics.Raycast(digLocation, Vector3.down, out var hit, transform.localScale.y + 0.01f, groundLayer))
             {
-                digger.ModifyAsyncBuffured(pastLocation, brushType, actionType, textureIndex, opacity, transform.localScale.x * digSizeMultiplier);
+                digger.ModifyAsyncBuffured(digLocation, brushType, actionType, textureIndex, opacity, digSize);
+                digActions.Add(new DigAction
+                {
+                    position = digLocation,
+                    size = digSize,
+                    opacity = opacity
+                });
             }
         }
     }
@@ -82,10 +90,17 @@ public class PlayerController : MonoBehaviour
         cameraLookingDirection = new Vector3(cameraLookingDirection.x, 0f, cameraLookingDirection.z).normalized;
         var cameraRelativeForce = Quaternion.FromToRotation(Vector3.forward, cameraLookingDirection) * movementRelativeToCamera;
 
-        rb.AddForce(cameraRelativeForce * moveSpeed * transform.localScale.x);
+        rb.AddForce(cameraRelativeForce * moveSpeed * rb.mass);
         if (isJumping && isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
         }
     }
+}
+
+public class DigAction
+{
+    public Vector3 position;
+    public float size;
+    public float opacity;
 }
