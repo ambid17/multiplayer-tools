@@ -56,7 +56,7 @@ public class DestructibleObject : NetworkBehaviour
 
     public void Explode(Vector3 hitPoint, float impactForceMultiplier)
     {
-        // re-check if already exploded, required for ExplosionTester
+        // check if already exploded, prevent double interaction
         if (hasExploded) return;
         hasExploded = true;
 

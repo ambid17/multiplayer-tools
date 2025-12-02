@@ -56,7 +56,8 @@ public class PlayerController : NetworkBehaviour
             GetComponent<PlayerInput>().enabled = true;
         }
     }
-
+    // TODO: follow this: https://www.youtube.com/watch?v=9aPBqiaV8fE
+    // move digging to its own script
     void Update()
     {
         if (!IsOwner)
