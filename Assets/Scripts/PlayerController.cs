@@ -13,7 +13,6 @@ public class PlayerController : NetworkBehaviour
     public float jumpForce = 5f;
     public LayerMask groundLayer;
     public Transform cameraTransform;
-    public DiggerMasterRuntime digger;
 
     InputAction moveAction;
     InputAction jumpAction;
@@ -28,20 +27,11 @@ public class PlayerController : NetworkBehaviour
     private Vector3 velocity;
     [SerializeField]
     private float velocityMagnitude;
-
-    [SerializeField] private BrushType brushType = BrushType.Sphere;
-    [SerializeField] private ActionType actionType = ActionType.Dig;
-    [SerializeField] private int textureIndex = 0;
-    [SerializeField] private float opacityMax = 0.5f;
-    [SerializeField] private float minSpeedToPaint = 1f;
-    [SerializeField] private int frameInPastToPaint = 5;
-    [SerializeField] private float digSizeMultiplier = 0.8f;
-    private float theoreticalMaxVelocity = 15f;
-    private List<DigAction> digActions = new List<DigAction>();
+    public static float theoreticalMaxVelocity = 15f;
+    public static float minSpeedToGrow = 1f;
 
     void Start()
     {
-        digger = FindAnyObjectByType<DiggerMasterRuntime>();
         cameraTransform = Camera.main.transform;
         rb = GetComponent<Rigidbody>();
         moveAction = InputSystem.actions.FindAction("Move");
@@ -56,8 +46,8 @@ public class PlayerController : NetworkBehaviour
             GetComponent<PlayerInput>().enabled = true;
         }
     }
+
     // TODO: follow this: https://www.youtube.com/watch?v=9aPBqiaV8fE
-    // move digging to its own script
     void Update()
     {
         if (!IsOwner)
@@ -71,26 +61,12 @@ public class PlayerController : NetworkBehaviour
         velocityMagnitude = velocity.magnitude;
 
         var horizontalVelocity = new Vector3(velocity.x, 0, velocity.z);
-        if (horizontalVelocity.magnitude > minSpeedToPaint)
+        if (horizontalVelocity.magnitude > minSpeedToGrow)
         {
             // TODO: lower in size if the ground isn't snow, and dont deform the terrain
             float scaleIncrease = growSpeed * horizontalVelocity.magnitude * Time.deltaTime;
             transform.localScale += new Vector3(scaleIncrease, scaleIncrease, scaleIncrease);
             rb.mass = transform.localScale.x;
-
-            var opacity = Mathf.Lerp(0, opacityMax, horizontalVelocity.magnitude / theoreticalMaxVelocity);
-            var digLocation = transform.position - (velocity * Time.deltaTime * frameInPastToPaint);
-            var digSize = transform.localScale.x * digSizeMultiplier;
-            if (Physics.Raycast(digLocation, Vector3.down, out var hit, transform.localScale.y + 0.01f, groundLayer))
-            {
-                digger.ModifyAsyncBuffured(digLocation, brushType, actionType, textureIndex, opacity, digSize);
-                digActions.Add(new DigAction
-                {
-                    position = digLocation,
-                    size = digSize,
-                    opacity = opacity
-                });
-            }
         }
     }
 

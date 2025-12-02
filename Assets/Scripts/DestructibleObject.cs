@@ -1,3 +1,4 @@
+using FishNet.Component.Transforming;
 using FishNet.Object;
 using System.Buffers.Text;
 using System.Drawing;
@@ -49,18 +50,21 @@ public class DestructibleObject : NetworkBehaviour
             if(impactForce >= requiredImpactForce)
             {
                 var impactForceMultiplier = impactForce / requiredImpactForce;
+                Debug.Log("Sending explosion RPC");
                 Explode(collision.GetContact(0).point, impactForceMultiplier);
             }
         }
     }
-
+    [ServerRpc(RequireOwnership = false, RunLocally = true)]
     public void Explode(Vector3 hitPoint, float impactForceMultiplier)
     {
+        Debug.Log("Recieved explosion RPC");
         // check if already exploded, prevent double interaction
         if (hasExploded) return;
         hasExploded = true;
 
-        SpawnExplosion();
+        NetworkObject obj = Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);
+        Spawn(obj);
 
         var explosionForce = baseExplosionForce * impactForceMultiplier;
 
@@ -75,22 +79,14 @@ public class DestructibleObject : NetworkBehaviour
 
         foreach (Transform child in transform)
         {
-            var rb = child.gameObject.AddComponent<Rigidbody>();
             // TODO: adjust mass based on size of child? Might not be necessary since force is based on requiredImpactForce
             // maybe just calcualte required force to be based on the child size?
-            rb.mass = 1.0f; 
+            var rb = child.gameObject.AddComponent<Rigidbody>();
+            child.gameObject.AddComponent<NetworkTransform>();
 
             // we want the explosion to push outwards from the hit point, but always have an upwards component
             rb.AddExplosionForce(explosionForce, hitPoint, 1000, 10);
         }
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    private void SpawnExplosion()
-    {
-        Debug.Log("Received explosion message from server");
-        NetworkObject obj = Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);
-        Spawn(obj);
     }
 
     private void SetupCollider()

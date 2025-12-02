@@ -63,6 +63,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2674778056210020807}
   - component: {fileID: 4342480635146673569}
+  - component: {fileID: 4857128460777776873}
   - component: {fileID: 424378626242463014}
   - component: {fileID: 6760949385212868770}
   - component: {fileID: 2037093847235152935}
@@ -115,16 +116,32 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   cameraTransform: {fileID: 0}
-  digger: {fileID: 0}
   isGrounded: 0
   isJumping: 0
   velocity: {x: 0, y: 0, z: 0}
   velocityMagnitude: 0
+--- !u!114 &4857128460777776873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8013252602102694209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e758d0f380b38947a7d755ad4233f6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDigController
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 2037093847235152935}
+  _networkObjectCache: {fileID: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
   brushType: 0
   actionType: 0
   textureIndex: 0
-  opacityMax: 0.25
-  minSpeedToPaint: 1
+  opacityMax: 0.5
   frameInPastToPaint: 10
   digSizeMultiplier: 0.8
 --- !u!54 &424378626242463014
