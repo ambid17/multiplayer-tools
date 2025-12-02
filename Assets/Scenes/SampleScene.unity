@@ -864,6 +864,57 @@ MonoBehaviour:
   onChunkObjectCreated:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &554146697 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4327196512713024266, guid: 09efab120c384944aaa82851bdf2c13e, type: 3}
+  m_PrefabInstance: {fileID: 749690569}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &554146700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554146697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2836e36774ca1c4bbbee976e17b649c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FishNet.Runtime::FishNet.Component.Transforming.NetworkTransform
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 749690571}
+  _networkObjectCache: {fileID: 0}
+  _componentConfiguration: 0
+  _synchronizeParent: 0
+  _packing:
+    Position: 1
+    Rotation: 1
+    Scale: 0
+  _useScaledTime: 1
+  _interpolation: 2
+  _extrapolation: 2
+  _enableTeleport: 0
+  _teleportThreshold: 1
+  _clientAuthoritative: 1
+  _sendToOwner: 1
+  _interval: 1
+  _synchronizePosition: 1
+  _positionSensitivity: 0.001
+  _positionSnapping:
+    X: 0
+    Y: 0
+    Z: 0
+  _synchronizeRotation: 1
+  _rotationSnapping:
+    X: 0
+    Y: 0
+    Z: 0
+  _synchronizeScale: 1
+  _scaleSensitivity: 0.001
+  _scaleSnapping:
+    X: 0
+    Y: 0
+    Z: 0
 --- !u!1 &591082634
 GameObject:
   m_ObjectHideFlags: 0
@@ -958,13 +1009,27 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4327196512713024266, guid: 09efab120c384944aaa82851bdf2c13e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 554146700}
   m_SourcePrefab: {fileID: 100100000, guid: 09efab120c384944aaa82851bdf2c13e, type: 3}
 --- !u!4 &749690570 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6058085860465246955, guid: 09efab120c384944aaa82851bdf2c13e, type: 3}
   m_PrefabInstance: {fileID: 749690569}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &749690571 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8582864704126965706, guid: 09efab120c384944aaa82851bdf2c13e, type: 3}
+  m_PrefabInstance: {fileID: 749690569}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FishNet.Runtime::FishNet.Object.NetworkObject
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

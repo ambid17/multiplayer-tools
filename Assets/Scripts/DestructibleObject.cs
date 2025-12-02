@@ -26,33 +26,31 @@ public class DestructibleObject : NetworkBehaviour
     {
         if(hasExploded)
         {
-            explosionTimer += Time.deltaTime;
-            if(explosionTimer >= childDurationAfterExplosion)
-            {
-                foreach (Transform child in transform)
-                {
-                    Destroy(child.gameObject);
-                }
-                Destroy(gameObject);
-            }
+            //explosionTimer += Time.deltaTime;
+            //if(explosionTimer >= childDurationAfterExplosion)
+            //{
+            //    foreach (Transform child in transform)
+            //    {
+            //        Destroy(child.gameObject);
+            //    }
+            //    Destroy(gameObject);
+            //}
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(hasExploded) return;
-
         if (collision.gameObject.layer == GameManager.PlayerLayer)
         {
-            // F = m * a (where a = change in velocity / time, in this case we assume all of the mass is applied and an instant stop time)
             var impactForce = collision.rigidbody.mass * collision.relativeVelocity.magnitude;
 
-            if(impactForce >= requiredImpactForce)
-            {
+            // TODO: this breaks sending explosions to the client
+            //if(impactForce >= requiredImpactForce)
+            //{
                 var impactForceMultiplier = impactForce / requiredImpactForce;
                 Debug.Log("Sending explosion RPC");
                 Explode(collision.GetContact(0).point, impactForceMultiplier);
-            }
+            //}
         }
     }
     [ServerRpc(RequireOwnership = false, RunLocally = true)]

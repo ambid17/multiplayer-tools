@@ -227,7 +227,7 @@ MonoBehaviour:
   _defaultDespawnType: 0
   _initializedTimestamp: -8584369698217799957
   NetworkObserver: {fileID: 0}
-  _enablePrediction: 1
+  _enablePrediction: 0
   _predictionType: 1
   _graphicalObject: {fileID: 7391888392320124337}
   _detachGraphicalObject: 0

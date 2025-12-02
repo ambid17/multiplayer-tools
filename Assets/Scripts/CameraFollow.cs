@@ -3,6 +3,7 @@ using FishNet.Object;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+// TODO: make this not a child of the player, otherwise jitter
 public class CameraFollow : NetworkBehaviour
 {
     [Header("Settings")]
