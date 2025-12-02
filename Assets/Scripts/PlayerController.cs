@@ -47,6 +47,8 @@ public class PlayerController : NetworkBehaviour
         }
         else
         {
+            if(!cameraFollow)
+                cameraFollow = Camera.main.GetComponent<CameraFollow>();
             cameraFollow.target = this.transform;
         }
     }
