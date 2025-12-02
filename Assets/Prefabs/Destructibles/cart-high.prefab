@@ -82,14 +82,17 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3b4785ec3a2b4b044a131276b9f8586c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5761940917787858531}
+      addedObject: {fileID: -2796265900662585584}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3b4785ec3a2b4b044a131276b9f8586c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1042276841196818165}
   m_SourcePrefab: {fileID: 100100000, guid: 3b4785ec3a2b4b044a131276b9f8586c, type: 3}
 --- !u!1 &3469483157277960955 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 3b4785ec3a2b4b044a131276b9f8586c, type: 3}
   m_PrefabInstance: {fileID: 4388614201418831786}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5761940917787858531
+--- !u!114 &-2796265900662585584
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,7 +104,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f969eaa47358ca4cbc166983fbbea6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DestructibleObject
-  explosionEffectPrefab: {fileID: 6280227190749214725, guid: 0b905f4283833e641960455332b58ff7, type: 3}
-  requiredImpactForce: 15
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: -1042276841196818165}
+  _networkObjectCache: {fileID: 0}
+  explosionEffectPrefab: {fileID: -3889372551800391470, guid: 0b905f4283833e641960455332b58ff7, type: 3}
+  requiredImpactForce: 5
   baseExplosionForce: 500
-  explosionDuration: 2
+--- !u!114 &-1042276841196818165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3469483157277960955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FishNet.Runtime::FishNet.Object.NetworkObject
+  <IsNested>k__BackingField: 0
+  WasActiveDuringEdit: 0
+  WasActiveDuringEdit_Set1: 1
+  <ComponentIndex>k__BackingField: 0
+  <PredictedSpawn>k__BackingField: {fileID: 0}
+  <PredictedOwner>k__BackingField: {fileID: 0}
+  NetworkBehaviours: []
+  InitializedParentNetworkBehaviour: {fileID: 0}
+  InitializedNestedNetworkObjects: []
+  RuntimeParentNetworkBehaviour: {fileID: 0}
+  RuntimeChildNetworkBehaviours: []
+  _isNetworked: 1
+  _isSpawnable: 1
+  _isGlobal: 0
+  _initializeOrder: 0
+  _preventDespawnOnDisconnect: 0
+  _defaultDespawnType: 0
+  _initializedTimestamp: 0
+  NetworkObserver: {fileID: 0}
+  _enablePrediction: 0
+  _predictionType: 0
+  _graphicalObject: {fileID: 0}
+  _detachGraphicalObject: 0
+  _enableStateForwarding: 1
+  _networkTransform: {fileID: 0}
+  _ownerInterpolation: 1
+  _ownerSmoothedProperties: 255
+  _adaptiveInterpolation: 3
+  _spectatorSmoothedProperties: 255
+  _spectatorInterpolation: 2
+  _enableTeleport: 0
+  _teleportThreshold: 1
+  <PrefabId>k__BackingField: 65535
+  <SpawnableCollectionId>k__BackingField: 0
+  <AssetPathHash>k__BackingField: 9332385642586082638
+  SceneId: 0
+  SerializedTransformProperties:
+    Position: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}
+    Scale: {x: 0, y: 0, z: 0}
+    IsValid: 0

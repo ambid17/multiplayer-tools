@@ -1,10 +1,11 @@
+using FishNet.Object;
 using System.Buffers.Text;
 using System.Drawing;
 using UnityEngine;
 
-public class DestructibleObject : MonoBehaviour
+public class DestructibleObject : NetworkBehaviour
 {
-    public GameObject explosionEffectPrefab;
+    public NetworkObject explosionEffectPrefab;
     public float requiredImpactForce = 5.0f;
     public float baseExplosionForce = 500.0f;
 
@@ -59,7 +60,7 @@ public class DestructibleObject : MonoBehaviour
         if (hasExploded) return;
         hasExploded = true;
 
-        Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);
+        SpawnExplosion();
 
         var explosionForce = baseExplosionForce * impactForceMultiplier;
 
@@ -82,6 +83,14 @@ public class DestructibleObject : MonoBehaviour
             // we want the explosion to push outwards from the hit point, but always have an upwards component
             rb.AddExplosionForce(explosionForce, hitPoint, 1000, 10);
         }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SpawnExplosion()
+    {
+        Debug.Log("Received explosion message from server");
+        NetworkObject obj = Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);
+        Spawn(obj);
     }
 
     private void SetupCollider()

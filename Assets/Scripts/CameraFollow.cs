@@ -1,11 +1,10 @@
-using FishNet.Transporting.Yak;
+using FishNet.Connection;
+using FishNet.Object;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CameraFollow : MonoBehaviour
+public class CameraFollow : NetworkBehaviour
 {
-    public Transform target;
-
     [Header("Settings")]
     public float distance = 4f;
     public float distanceGrowth = 1f;
@@ -21,10 +20,29 @@ public class CameraFollow : MonoBehaviour
     float yaw;
     float pitch;
     Vector3 currentRotation;
+    Transform target;
 
     void Start()
     {
+        target = transform.parent;
         lookAction = InputSystem.actions.FindAction("Look");
+    }
+
+    public override void OnOwnershipClient(NetworkConnection prevOwner)
+    {
+        
+        if(Camera.main == null)
+        {
+            Debug.LogWarning("No main camera found for CameraFollow script.");
+            return;
+        }
+
+        if (IsOwner)
+        {
+            Camera.main.transform.SetParent(transform);
+            Camera.main.transform.localPosition = Vector3.zero;
+            Camera.main.transform.localRotation = Quaternion.identity;
+        }
     }
 
     void LateUpdate()

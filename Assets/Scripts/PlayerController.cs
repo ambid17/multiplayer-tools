@@ -1,10 +1,11 @@
 using Digger.Modules.Core.Sources;
 using Digger.Modules.Runtime.Sources;
+using FishNet.Object;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     private Rigidbody rb;
     public float moveSpeed = 10f;
@@ -41,14 +42,25 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         digger = FindAnyObjectByType<DiggerMasterRuntime>();
+        cameraTransform = Camera.main.transform;
         rb = GetComponent<Rigidbody>();
         moveAction = InputSystem.actions.FindAction("Move");
         jumpAction = InputSystem.actions.FindAction("Jump");
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+    public override void OnStartClient()
+    {
+        if (!IsOwner)
+        {
+            GetComponent<PlayerInput>().enabled = true;
+        }
+    }
+
     void Update()
     {
+        if (!IsOwner)
+            return;
         if (GameManager.Instance.IsPaused) return;
         moveInputs = moveAction.ReadValue<Vector2>();
         isJumping = jumpAction.ReadValue<float>() != 0 ? true : false;
@@ -83,6 +95,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!IsOwner)
+            return;
         if (GameManager.Instance.IsPaused) return;
         Vector3 forceDirection = Vector3.zero;
         var movementRelativeToCamera = new Vector3(moveInputs.x, 0, moveInputs.y);

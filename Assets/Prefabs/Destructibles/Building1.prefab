@@ -50,7 +50,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f969eaa47358ca4cbc166983fbbea6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DestructibleObject
-  explosionEffectPrefab: {fileID: 6280227190749214725, guid: 0b905f4283833e641960455332b58ff7, type: 3}
+  _componentIndexCache: 1
+  _addedNetworkObject: {fileID: 8582864704126965706}
+  _networkObjectCache: {fileID: 8582864704126965706}
+  explosionEffectPrefab: {fileID: -3889372551800391470, guid: 0b905f4283833e641960455332b58ff7, type: 3}
   requiredImpactForce: 5
   baseExplosionForce: 500
 --- !u!1 &3633685201600419466
@@ -101,7 +104,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f969eaa47358ca4cbc166983fbbea6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DestructibleObject
-  explosionEffectPrefab: {fileID: 6280227190749214725, guid: 0b905f4283833e641960455332b58ff7, type: 3}
+  _componentIndexCache: 4
+  _addedNetworkObject: {fileID: 8582864704126965706}
+  _networkObjectCache: {fileID: 8582864704126965706}
+  explosionEffectPrefab: {fileID: -3889372551800391470, guid: 0b905f4283833e641960455332b58ff7, type: 3}
   requiredImpactForce: 5
   baseExplosionForce: 500
 --- !u!1 &4327196512713024266
@@ -154,7 +160,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f969eaa47358ca4cbc166983fbbea6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DestructibleObject
-  explosionEffectPrefab: {fileID: 6280227190749214725, guid: 0b905f4283833e641960455332b58ff7, type: 3}
+  _componentIndexCache: 5
+  _addedNetworkObject: {fileID: 8582864704126965706}
+  _networkObjectCache: {fileID: 8582864704126965706}
+  explosionEffectPrefab: {fileID: -3889372551800391470, guid: 0b905f4283833e641960455332b58ff7, type: 3}
   requiredImpactForce: 5
   baseExplosionForce: 500
 --- !u!1 &5079691815120238533
@@ -207,7 +216,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f969eaa47358ca4cbc166983fbbea6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DestructibleObject
-  explosionEffectPrefab: {fileID: 6280227190749214725, guid: 0b905f4283833e641960455332b58ff7, type: 3}
+  _componentIndexCache: 2
+  _addedNetworkObject: {fileID: 8582864704126965706}
+  _networkObjectCache: {fileID: 8582864704126965706}
+  explosionEffectPrefab: {fileID: -3889372551800391470, guid: 0b905f4283833e641960455332b58ff7, type: 3}
   requiredImpactForce: 5
   baseExplosionForce: 500
 --- !u!1 &5421939308033285211
@@ -219,6 +231,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6058085860465246955}
+  - component: {fileID: 8582864704126965706}
+  - component: {fileID: 5996120636303456000}
   m_Layer: 0
   m_Name: Building1
   m_TagString: Untagged
@@ -247,6 +261,81 @@ Transform:
   - {fileID: 5447460884378471883}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8582864704126965706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5421939308033285211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FishNet.Runtime::FishNet.Object.NetworkObject
+  <IsNested>k__BackingField: 0
+  WasActiveDuringEdit: 0
+  WasActiveDuringEdit_Set1: 1
+  <ComponentIndex>k__BackingField: 0
+  <PredictedSpawn>k__BackingField: {fileID: 0}
+  <PredictedOwner>k__BackingField: {fileID: 0}
+  NetworkBehaviours:
+  - {fileID: 5996120636303456000}
+  - {fileID: 2657341962459924868}
+  - {fileID: 200268159481097238}
+  - {fileID: 1560427094303159845}
+  - {fileID: 4435865740594238878}
+  - {fileID: 6338032985974261612}
+  - {fileID: 4690272386476576012}
+  InitializedParentNetworkBehaviour: {fileID: 0}
+  InitializedNestedNetworkObjects: []
+  RuntimeParentNetworkBehaviour: {fileID: 0}
+  RuntimeChildNetworkBehaviours: []
+  _isNetworked: 1
+  _isSpawnable: 1
+  _isGlobal: 0
+  _initializeOrder: 0
+  _preventDespawnOnDisconnect: 0
+  _defaultDespawnType: 0
+  _initializedTimestamp: -8584369705682323047
+  NetworkObserver: {fileID: 0}
+  _enablePrediction: 0
+  _predictionType: 0
+  _graphicalObject: {fileID: 0}
+  _detachGraphicalObject: 0
+  _enableStateForwarding: 1
+  _networkTransform: {fileID: 0}
+  _ownerInterpolation: 1
+  _ownerSmoothedProperties: 255
+  _adaptiveInterpolation: 3
+  _spectatorSmoothedProperties: 255
+  _spectatorInterpolation: 2
+  _enableTeleport: 0
+  _teleportThreshold: 1
+  <PrefabId>k__BackingField: 15
+  <SpawnableCollectionId>k__BackingField: 0
+  <AssetPathHash>k__BackingField: 18339196291320054884
+  SceneId: 0
+  SerializedTransformProperties:
+    Position: {x: 318.41, y: 130.09, z: 332.14}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 2, y: 2, z: 2}
+    IsValid: 1
+--- !u!114 &5996120636303456000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5421939308033285211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FishNet.Runtime::FishNet.Object.EmptyNetworkBehaviour
+  _componentIndexCache: 0
+  _addedNetworkObject: {fileID: 8582864704126965706}
+  _networkObjectCache: {fileID: 8582864704126965706}
 --- !u!1 &8130984180775265923
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,7 +384,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f969eaa47358ca4cbc166983fbbea6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DestructibleObject
-  explosionEffectPrefab: {fileID: 6280227190749214725, guid: 0b905f4283833e641960455332b58ff7, type: 3}
+  _componentIndexCache: 3
+  _addedNetworkObject: {fileID: 8582864704126965706}
+  _networkObjectCache: {fileID: 8582864704126965706}
+  explosionEffectPrefab: {fileID: -3889372551800391470, guid: 0b905f4283833e641960455332b58ff7, type: 3}
   requiredImpactForce: 5
   baseExplosionForce: 500
 --- !u!1001 &422233822659310890
@@ -1466,7 +1558,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f969eaa47358ca4cbc166983fbbea6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DestructibleObject
-  explosionEffectPrefab: {fileID: 6280227190749214725, guid: 0b905f4283833e641960455332b58ff7, type: 3}
+  _componentIndexCache: 6
+  _addedNetworkObject: {fileID: 8582864704126965706}
+  _networkObjectCache: {fileID: 8582864704126965706}
+  explosionEffectPrefab: {fileID: -3889372551800391470, guid: 0b905f4283833e641960455332b58ff7, type: 3}
   requiredImpactForce: 50
   baseExplosionForce: 500
 --- !u!4 &5447460884378471883 stripped
