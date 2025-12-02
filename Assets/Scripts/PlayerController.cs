@@ -12,7 +12,7 @@ public class PlayerController : NetworkBehaviour
     public float growSpeed = 0.001f;
     public float jumpForce = 5f;
     public LayerMask groundLayer;
-    public Transform cameraTransform;
+    public CameraFollow cameraFollow;
 
     InputAction moveAction;
     InputAction jumpAction;
@@ -32,7 +32,7 @@ public class PlayerController : NetworkBehaviour
 
     void Start()
     {
-        cameraTransform = Camera.main.transform;
+        cameraFollow = Camera.main.GetComponent<CameraFollow>();
         rb = GetComponent<Rigidbody>();
         moveAction = InputSystem.actions.FindAction("Move");
         jumpAction = InputSystem.actions.FindAction("Jump");
@@ -44,6 +44,10 @@ public class PlayerController : NetworkBehaviour
         if (!IsOwner)
         {
             GetComponent<PlayerInput>().enabled = true;
+        }
+        else
+        {
+            cameraFollow.target = this.transform;
         }
     }
 
@@ -77,7 +81,7 @@ public class PlayerController : NetworkBehaviour
         if (GameManager.Instance.IsPaused) return;
         Vector3 forceDirection = Vector3.zero;
         var movementRelativeToCamera = new Vector3(moveInputs.x, 0, moveInputs.y);
-        var cameraLookingDirection = cameraTransform.rotation * Vector3.forward;
+        var cameraLookingDirection = cameraFollow.transform.rotation * Vector3.forward;
         cameraLookingDirection = new Vector3(cameraLookingDirection.x, 0f, cameraLookingDirection.z).normalized;
         var cameraRelativeForce = Quaternion.FromToRotation(Vector3.forward, cameraLookingDirection) * movementRelativeToCamera;
 
@@ -87,11 +91,4 @@ public class PlayerController : NetworkBehaviour
             rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
         }
     }
-}
-
-public class DigAction
-{
-    public Vector3 position;
-    public float size;
-    public float opacity;
 }

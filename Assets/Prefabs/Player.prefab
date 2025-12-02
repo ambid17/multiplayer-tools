@@ -1,58 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4787402971780909401
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3600786623902921720}
-  - component: {fileID: 2430234573116695775}
-  m_Layer: 7
-  m_Name: CameraHolder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3600786623902921720
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4787402971780909401}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2674778056210020807}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2430234573116695775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4787402971780909401}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e8343dc05c210a4ca2ad34ab08006b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  _componentIndexCache: 3
-  _addedNetworkObject: {fileID: 2037093847235152935}
-  _networkObjectCache: {fileID: 2037093847235152935}
-  distance: 4
-  distanceGrowth: 1.5
-  mouseSensitivity: 50
-  verticalMin: -30
-  verticalMax: 70
-  rotationSmoothTime: 0.12
 --- !u!1 &8013252602102694209
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,7 +37,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3600786623902921720}
   - {fileID: 7391888392320124337}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -115,7 +61,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  cameraTransform: {fileID: 0}
+  cameraFollow: {fileID: 0}
   isGrounded: 0
   isJumping: 0
   velocity: {x: 0, y: 0, z: 0}
@@ -214,7 +160,7 @@ MonoBehaviour:
   - {fileID: 4342480635146673569}
   - {fileID: -6612584194720313633}
   - {fileID: 557508117673631213}
-  - {fileID: 2430234573116695775}
+  - {fileID: 0}
   InitializedParentNetworkBehaviour: {fileID: 0}
   InitializedNestedNetworkObjects: []
   RuntimeParentNetworkBehaviour: {fileID: 0}

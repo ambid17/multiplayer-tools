@@ -21,29 +21,11 @@ public class CameraFollow : NetworkBehaviour
     float yaw;
     float pitch;
     Vector3 currentRotation;
-    Transform target;
+    public Transform target;
 
     void Start()
     {
-        target = transform.parent;
         lookAction = InputSystem.actions.FindAction("Look");
-    }
-
-    public override void OnOwnershipClient(NetworkConnection prevOwner)
-    {
-        
-        if(Camera.main == null)
-        {
-            Debug.LogWarning("No main camera found for CameraFollow script.");
-            return;
-        }
-
-        if (IsOwner)
-        {
-            Camera.main.transform.SetParent(transform);
-            Camera.main.transform.localPosition = Vector3.zero;
-            Camera.main.transform.localRotation = Quaternion.identity;
-        }
     }
 
     void LateUpdate()

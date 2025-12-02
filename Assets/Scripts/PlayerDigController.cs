@@ -51,3 +51,10 @@ public class PlayerDigController : NetworkBehaviour
         }
     }
 }
+
+public class DigAction
+{
+    public Vector3 position;
+    public float size;
+    public float opacity;
+}
